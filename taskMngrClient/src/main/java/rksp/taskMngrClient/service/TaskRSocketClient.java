@@ -21,6 +21,20 @@ public class TaskRSocketClient {
                 .retrieveMono(Task.class);
     }
 
+    public Flux<Task> streamTasksByStatus(String status) {
+        return requester.route("tasks.stream.by_status")
+                .data(status)
+                .retrieveFlux(Task.class)
+                .limitRate(5);
+    }
+
+    public Flux<Task> streamTasksByStatusDelay(String status) {
+        return requester.route("tasks.stream.by_status")
+                .data(status)
+                .retrieveFlux(Task.class)
+                .limitRate(1);
+    }
+
     public Flux<Task> streamTasks() {
         return requester.route("tasks.stream")
                 .retrieveFlux(Task.class);

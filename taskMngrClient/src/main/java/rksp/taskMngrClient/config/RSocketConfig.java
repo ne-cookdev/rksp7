@@ -15,7 +15,7 @@ public class RSocketConfig {
     public RSocketRequester rSocketRequester(RSocketRequester.Builder builder, RSocketStrategies strategies) {
         return builder
                 .rsocketStrategies(strategies)
-                .tcp("localhost", 7000);
+                .tcp("app-server", 7000);
     }
 
     @Bean

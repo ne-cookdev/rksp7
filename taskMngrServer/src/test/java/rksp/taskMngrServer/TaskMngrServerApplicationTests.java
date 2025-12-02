@@ -78,7 +78,6 @@ class TaskMngrServerApplicationTests {
 
     @Test
     void testRequestStream() {
-        // убедимся, что есть данные
         taskRepository.save(new Task(null, "Stream1", "READY"));
         taskRepository.save(new Task(null, "Stream2", "READY"));
 

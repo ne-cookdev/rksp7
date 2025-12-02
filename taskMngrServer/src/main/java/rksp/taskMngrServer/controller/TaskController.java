@@ -16,6 +16,11 @@ public class TaskController {
         this.taskService = taskService;
     }
 
+    @MessageMapping("tasks.stream.by_status")
+    public Flux<Task> streamTasksByStatus(String status) {
+        return taskService.streamTasksByStatus(status);
+    }
+
     @MessageMapping("tasks.stream")
     public Flux<Task> streamTasks() {
         return taskService.streamTasks();

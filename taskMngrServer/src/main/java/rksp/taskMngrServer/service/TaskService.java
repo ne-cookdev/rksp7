@@ -6,6 +6,8 @@ import reactor.core.publisher.Mono;
 import rksp.taskMngrServer.entity.Task;
 import rksp.taskMngrServer.repository.TaskRepository;
 
+import java.time.Duration;
+
 @Service
 public class TaskService {
     private final TaskRepository taskRepository;
@@ -35,5 +37,9 @@ public class TaskService {
         return Flux.from(tasks).flatMap(task -> {
             return Mono.fromCallable(() -> taskRepository.save(task));
         });
+    }
+
+    public Flux<Task> streamTasksByStatus(String status) {
+        return Flux.fromIterable(taskRepository.findByStatus(status)).delaySequence(Duration.ofSeconds(1));
     }
 }
